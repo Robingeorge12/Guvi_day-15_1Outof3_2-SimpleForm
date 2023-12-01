@@ -1,18 +1,18 @@
 let form = document
   .querySelector("#formSubmit")
   .addEventListener("submit", mySubmit);
-
+let data =JSON.parse(localStorage.getItem("reg")) || []
 
 let fd = [];
 
 function foods(val) {
 
-  if (val) {
+  if (val) { 
     let x = fd.findIndex((el) => {
       return el == val;
     });
 
-    console.log(x)
+    // console.log(x)
     if (x!=-1) {
       fd.splice(x, 1);
     } 
@@ -20,7 +20,7 @@ function foods(val) {
       fd.push(val);
     }
   }
-  console.log(fd)
+  // console.log(fd)
 }
 
 function mySubmit(e) {
@@ -61,5 +61,85 @@ function mySubmit(e) {
     state,
   };
 
-  console.log(param);
+  data.push(param)
+
+  localStorage.setItem("reg",JSON.stringify(data))
+  alert("Details Added ")
+  window.location.reload()
+  // console.log(data)
+//   console.log(param);
 }
+
+// let tableData = JSON.parse(localStorage.getItem("reg")) || []
+// console.log(tableData,tableData.length)
+
+display(data)
+
+function display(tableData){
+
+  document.querySelector("#list").innerHTML = ""
+
+  tableData?.forEach((el,i)=>{
+
+
+
+    let tab = document.createElement("tr")
+
+    let td0 = document.createElement("td")
+    td0.textContent = i+1
+
+    let td1 = document.createElement("td")
+    td1.setAttribute("class","t1")
+    td1.innerText = el.f_name;
+    let td2 = document.createElement("td")
+    td2.innerText = el.l_name;
+
+    let td3 = document.createElement("td")
+    td3.innerText = el.gen;
+
+    let td4 = document.createElement("td")
+    td4.addEventListener("",(e)=>{
+          fdAll(el.fd)
+    })
+    fdAll(el)
+    function fdAll(e){
+
+e.fd.forEach((e)=>{
+  
+  td4.textContent = e
+  console.log(e)
+})
+  // td4.innerText = e
+  // console.log(e.fd)
+
+  // for(let i = 0; i<e.fd.length; i++){
+
+  //   td4.innerText = e.fd[i];
+  // }
+
+// })
+
+    }
+    // td4.innerText = ;
+
+    let td5 = document.createElement("td")
+    td5.innerText = el.pin;
+
+    let td6 = document.createElement("td")
+    td6.innerText = el.s;
+
+    let td7 = document.createElement("td")
+    td7.innerText = el.state;
+
+    let td8 = document.createElement("td")
+    td8.innerText = el.add;
+
+tab.append(td0,td1,td2,td3,td4,td5,td6,td7,td8)
+document.querySelector("#list").append(tab)
+
+    
+  });
+
+}
+
+
