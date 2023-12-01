@@ -98,29 +98,16 @@ function display(tableData){
     td3.innerText = el.gen;
 
     let td4 = document.createElement("td")
-    td4.addEventListener("",(e)=>{
-          fdAll(el.fd)
-    })
-    fdAll(el)
-    function fdAll(e){
-
-e.fd.forEach((e)=>{
-  
-  td4.textContent = e
-  console.log(e)
-})
-  // td4.innerText = e
-  // console.log(e.fd)
-
-  // for(let i = 0; i<e.fd.length; i++){
-
-  //   td4.innerText = e.fd[i];
-  // }
-
-// })
-
+    fdAll(el.fd);
+    function fdAll(fdArray) {
+      fdArray.forEach((item) => {
+        let fdContent = document.createElement("p");
+        fdContent.innerText = item;
+        td4.appendChild(fdContent);
+      });
     }
-    // td4.innerText = ;
+
+
 
     let td5 = document.createElement("td")
     td5.innerText = el.pin;
